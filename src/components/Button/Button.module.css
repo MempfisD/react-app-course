@@ -1,18 +1,31 @@
-.counter {
-	font-size: 16px;
-	padding: 5px 10px;
-	border-radius: 5px;
-	color: var(--accent);
-	background: var(--accent-bg);
-	border: 2px solid transparent;
-	transition: border-color 0.3s;
-	margin-bottom: 24px;
+.btn {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: var(--btn-bg-color);
+	color: var(--btn-text-color);
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
 
-	&:hover {
-		border-color: var(--accent-border);
-	}
-	&:focus-visible {
-		outline: 2px solid var(--accent);
-		outline-offset: 2px;
-	}
+.btn:hover {
+	border-color: #2f2f2f;
+}
+
+.btn:focus,
+.btn:focus-visible {
+	outline: 4px auto #2f2f2f;
+}
+
+.btn:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.isActive {
+	color: #000;
+	background-color: #ce7e1d;
 }

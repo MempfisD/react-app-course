@@ -2,6 +2,9 @@
 	--main-bg-color: #23272f;
 	--text-color: #fff;
 
+	--btn-bg-color: #383b3f;
+	--btn-text-color: #fff;
+
 	font-family: Inter, system-ui, Arial, Helvetica, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
@@ -33,6 +36,9 @@ a {
 	:root {
 		--main-bg-color: #fff;
 		--text-color: #000;
+
+		--btn-bg-color: #16444f;
+		--btn-text-color: #57c4dc;
 	}
 }
 
@@ -40,5 +46,8 @@ a {
 	:root {
 		--main-bg-color: #23272f;
 		--text-color: #fff;
+
+		--btn-bg-color: #383b3f;
+		--btn-text-color: #fff;
 	}
 }
