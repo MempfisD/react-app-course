@@ -1,9 +1,7 @@
-import cls from './Button.module.css'
-
-export const Button = ({ onClick, title }) => {
+export const Button = ({ onClick, children }) => {
 	return (
-		<button className={cls.counter} onClick={onClick}>
-			{title}
+		<button onClick={onClick}>
+			{children}
 		</button>
 	)
 }
