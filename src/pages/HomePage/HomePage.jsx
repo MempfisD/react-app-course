@@ -1,16 +1,16 @@
-import { QuestionCard } from '../../components/QuestionCard'
 import { API_URL } from '../../constans/'
 import { useEffect, useState } from 'react'
+import { QuestionCardList } from '../../components/QuestionCardList'
 
 
 export const HomePage = () => {
-	const [question, setQuestion] = useState([])
+	const [questions, setQuestions] = useState([])
 
 	const getQuestion = async () => {
 		try {
 			const response = await fetch(`${API_URL}/react`)
 			const data = await response.json()
-			setQuestion(data)
+			setQuestions(data)
 			console.log(data)
 		} catch (error) {
 			console.error(error)
@@ -23,9 +23,7 @@ export const HomePage = () => {
 
 	return (
 		<>
-			{question.map((card, index) => {
-				return <QuestionCard key={index} card={card} />
-			})}
+		<QuestionCardList cards={questions} />
 		</>
 	)
 }
