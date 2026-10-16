@@ -2,34 +2,27 @@ import { API_URL } from '../../constans/'
 import { useEffect, useState } from 'react'
 import { QuestionCardList } from '../../components/QuestionCardList'
 import { Loader } from '../../components/Loader'
-import { DelayFn } from '../../helpers/dalayFn.js'
+import { useFetch } from '../../hooks/useFetch.js'
 
 
 export const HomePage = () => {
 	const [questions, setQuestions] = useState([])
-	const [isLoading, setIsLoading] = useState(false)
+	const [getQuestion, isLoading, error] = useFetch(async (url) => {
+		const response = await fetch(`${API_URL}/${url}`)
+		const data = await response.json()
 
-	const getQuestion = async () => {
-		try {
-			setIsLoading(true)
-			await DelayFn()
-			const response = await fetch(`${API_URL}/react`)
-			const data = await response.json()
-			setQuestions(data)
-		} catch (error) {
-			console.error(error)
-		} finally {
-			setIsLoading(false)
-		}
-	}
+		setQuestions(data)
+		return data
+	})
 
 	useEffect(() => {
-		void getQuestion()
+		getQuestion('react')
 	}, [])
 
 	return (
 		<>
 			{isLoading && <Loader />}
+			{error && <p>{error}</p>}
 			<QuestionCardList cards={questions} />
 		</>
 	)
