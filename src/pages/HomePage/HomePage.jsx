@@ -1,6 +1,7 @@
 import { API_URL } from '../../constans/'
 import { useEffect, useState } from 'react'
 import { QuestionCardList } from '../../components/QuestionCardList'
+import { Loader } from '../../components/Loader'
 
 
 export const HomePage = () => {
@@ -23,6 +24,7 @@ export const HomePage = () => {
 
 	return (
 		<>
+			<Loader />
 		<QuestionCardList cards={questions} />
 		</>
 	)
