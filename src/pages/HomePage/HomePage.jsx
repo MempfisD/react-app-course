@@ -24,7 +24,7 @@ export const HomePage = () => {
 	}
 
 	useEffect(() => {
-		getQuestion()
+		void getQuestion()
 	}, [])
 
 	return (
