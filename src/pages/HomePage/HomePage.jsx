@@ -6,8 +6,11 @@ import { API_URL } from '../../constans'
 import { useFetch } from '../../hooks/useFetch.js'
 import cls from './HomePage.module.css'
 
+const DEFAULT_PER_PAGE = 10
+
 export const HomePage = () => {
-	const [questions, setQuestions] = useState([])
+	const [searchParams, setSearchParams] = useState(`?_page=1_per_page=${DEFAULT_PER_PAGE}`)
+	const [questions, setQuestions] = useState({})
 	const [searchValue, setSearchValue] = useState('')
 	const [sortSelectValue, setSortSelectValue] = useState('')
 
@@ -20,12 +23,19 @@ export const HomePage = () => {
 	})
 
 	const cards = useMemo(() => {
-		return questions.filter(d => d.question.toLowerCase().includes(searchValue.trim().toLowerCase()))
+		if (questions?.data) {
+			if (searchValue.trim()) {
+				return questions.data.filter(d => d.question.toLowerCase().includes(searchValue.trim().toLowerCase()))
+			} else {
+				return questions.data
+			}
+		}
+		return []
 	}, [questions, searchValue])
 
 	useEffect(() => {
-		getQuestion(`react?${sortSelectValue}`)
-	}, [sortSelectValue])
+		getQuestion(`react${searchParams}`)
+	}, [searchParams])
 
 	const onSearchChangeHandler = e => {
 		setSearchValue(e.target.value)
@@ -33,6 +43,7 @@ export const HomePage = () => {
 
 	const onSortSelectChangeHandler = e => {
 		setSortSelectValue(e.target.value)
+		setSearchParams(`?_page=1&_per_page=${DEFAULT_PER_PAGE}&${e.target.value}`)
 	}
 
 	return (
