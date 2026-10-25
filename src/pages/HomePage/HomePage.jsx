@@ -9,6 +9,7 @@ import cls from './HomePage.module.css'
 export const HomePage = () => {
 	const [questions, setQuestions] = useState([])
 	const [searchValue, setSearchValue] = useState('')
+	const [sortSelectValue, setSortSelectValue] = useState('')
 
 	const [getQuestion, isLoading, error] = useFetch(async url => {
 		const response = await fetch(`${API_URL}/${url}`)
@@ -23,17 +24,29 @@ export const HomePage = () => {
 	}, [questions, searchValue])
 
 	useEffect(() => {
-		getQuestion('react')
-	}, [])
+		getQuestion(`react?${sortSelectValue}`)
+	}, [sortSelectValue])
 
 	const onSearchChangeHandler = e => {
 		setSearchValue(e.target.value)
+	}
+
+	const onSortSelectChangeHandler = e => {
+		setSortSelectValue(e.target.value)
 	}
 
 	return (
 		<>
 			<div className={cls.controlsContainer}>
 				<SearchInput value={searchValue} onChange={onSearchChangeHandler} />
+				<select value={sortSelectValue} onChange={onSortSelectChangeHandler} className={cls.select}>
+					<option value=''>Sort by</option>
+					<hr />
+					<option value='_sort=level'> level ASC</option>
+					<option value='_sort=-level'> level DESC</option>
+					<option value='_sort=completed'> completed ASC</option>
+					<option value='_sort=-completed'> completed DESC</option>
+				</select>
 			</div>
 			{isLoading && <Loader />}
 			{error && <p>{error}</p>}
